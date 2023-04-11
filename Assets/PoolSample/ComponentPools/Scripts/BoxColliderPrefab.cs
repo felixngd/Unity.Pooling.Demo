@@ -9,9 +9,9 @@ namespace Pooling.Sample
     /// A custom prefab definition.
     /// You can override the Instantiate and Release methods to customize the behavior. 
     /// </summary>
-    public class CubeBoxCollider : ComponentPrefab<BoxCollider>
+    public class BoxColliderPrefab : ComponentPrefab<BoxCollider>
     {
-        public CubeBoxCollider() : base(){}
+        public BoxColliderPrefab() : base(){}
 
         protected override UniTask<BoxCollider> Instantiate(BoxCollider source, Transform parent, CancellationToken cancelToken)
         {

@@ -18,9 +18,9 @@ namespace Pooling.Sample
         private void Start()
         {
             //Get or create a pool
-            var pool = SharedPool.Of<ComponentPool<BoxCollider, CubeBoxCollider>>();
+            var pool = SharedPool.Of<ComponentPool<BoxCollider, BoxColliderPrefab>>();
             //Define the prefab to use for the pool
-            pool.Prefab = new CubeBoxCollider {Source = this.boxColliderPrefab, Parent = this.transform};
+            pool.Prefab = new BoxColliderPrefab {Source = this.boxColliderPrefab, Parent = this.transform};
             /*
             //You can also use a ComponentPrefab
             var pool2 = SharedPool.Of<ComponentPool<BoxCollider>>();
@@ -32,7 +32,7 @@ namespace Pooling.Sample
         {
             if (GUI.Button(new Rect(0, 100, 150, 50), "Rent 100"))
             {
-                var pool = SharedPool.Of<ComponentPool<BoxCollider, CubeBoxCollider>>();
+                var pool = SharedPool.Of<ComponentPool<BoxCollider, BoxColliderPrefab>>();
                 for (int i = 0; i < 100; i++)
                 {
                     var go = await pool.Rent();
@@ -47,7 +47,7 @@ namespace Pooling.Sample
 
             if (GUI.Button(new Rect(0, 200, 150, 50), "Rent Disposable Item"))
             {
-                var pool = SharedPool.Of<ComponentPool<BoxCollider, CubeBoxCollider>>();
+                var pool = SharedPool.Of<ComponentPool<BoxCollider, BoxColliderPrefab>>();
                 var context = pool.DisposableContext();
                 using var col = await context.Rent();
                 col.Instance.gameObject.SetActive(true);
@@ -76,7 +76,7 @@ namespace Pooling.Sample
 
         private void Return(int count = 1)
         {
-            var pool = SharedPool.Of<ComponentPool<BoxCollider, CubeBoxCollider>>();
+            var pool = SharedPool.Of<ComponentPool<BoxCollider, BoxColliderPrefab>>();
             for (int i = 0; i < count; i++)
             {
                 if (this._activeBoxColliders.Count > 0)
@@ -94,7 +94,7 @@ namespace Pooling.Sample
 
         private void ReleaseAll()
         {
-            var pool = SharedPool.Of<ComponentPool<BoxCollider, CubeBoxCollider>>();
+            var pool = SharedPool.Of<ComponentPool<BoxCollider, BoxColliderPrefab>>();
             pool.ReleaseInstances(0);
             this._activeBoxColliders.Clear();
         }
